@@ -4,7 +4,7 @@ const API_URL = "http://127.0.0.1:3333"
 interface User {
     id: string
     email: string
-    full_name?: string
+    fullName?: string
 }
 
 const handleApiError = (error: any) => {
@@ -50,7 +50,7 @@ export const authService = {
         try {
             const response = await fetchWithCredentials(`${API_URL}/auth/register`, {
                 method: "POST",
-                body: JSON.stringify({ full_name: fullName, email, password }),
+                body: JSON.stringify({ fullName: fullName, email, password }),
             })
 
             if (!response.ok) {
