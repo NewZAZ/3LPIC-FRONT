@@ -17,7 +17,7 @@ export default function DashboardLayout({
     return (
         <div className="flex min-h-screen flex-col">
             <header className="sticky top-0 z-10 border-b bg-background">
-                <div className="container flex h-16 items-center px-4">
+                <div className="container mx-auto flex h-16 items-center px-4">
                     <div className="flex items-center gap-2">
                         <Image src="/logo.svg" alt="Logo" width={40} height={40} className="rounded-md" />
                         <span className="text-xl font-bold">EduPlateforme</span>
@@ -42,7 +42,7 @@ export default function DashboardLayout({
                     <div className="ml-auto flex items-center space-x-4">{user && <UserNav />}</div>
                 </div>
             </header>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 mx-auto">{children}</main>
         </div>
     )
 }

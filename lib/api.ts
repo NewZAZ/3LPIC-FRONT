@@ -77,7 +77,7 @@ export const authService = {
 
     async getSession(): Promise<User | null> {
         try {
-            const response = await fetchWithCredentials(`${API_URL}/auth/session`)
+            const response = await fetchWithCredentials(`${API_URL}/user/me`)
 
             if (!response.ok) {
                 return null
