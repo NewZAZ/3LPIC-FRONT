@@ -37,6 +37,7 @@ export default function CoursePage() {
                 setCourse(courseData)
 
                 const modulesData = await courseService.getCourseModules(courseId)
+                console.log("Modules:", modulesData)
                 setModules(modulesData)
             } catch (error) {
                 console.error("Erreur lors du chargement du cours:", error)

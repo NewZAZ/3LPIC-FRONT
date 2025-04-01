@@ -1,7 +1,13 @@
 "use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 import { Card } from "@/components/ui/card"
 import { FileUpload } from "@/components/file-upload"
 
@@ -23,18 +29,24 @@ interface Document {
 }
 
 interface CourseContentProps {
-    modules: Module[]
+    modules?: Module[] | null
 }
 
 export function CourseContent({ modules }: CourseContentProps) {
+    const validModules = Array.isArray(modules) ? modules : []
+
     return (
         <div>
             <Accordion type="single" collapsible className="w-full">
-                {modules.map((module) => (
+                {validModules.map((module) => (
                     <AccordionItem key={module.id} value={module.id}>
-                        <AccordionTrigger className="text-lg font-medium">{module.title}</AccordionTrigger>
+                        <AccordionTrigger className="text-lg font-medium">
+                            {module.title}
+                        </AccordionTrigger>
                         <AccordionContent>
-                            {module.description && <p className="mb-4 text-muted-foreground">{module.description}</p>}
+                            {module.description && (
+                                <p className="mb-4 text-muted-foreground">{module.description}</p>
+                            )}
 
                             <div className="space-y-4">
                                 {module.documents?.map((doc) => (
@@ -91,7 +103,9 @@ export function CourseContent({ modules }: CourseContentProps) {
                                 ))}
 
                                 {!module.documents?.length && (
-                                    <p className="text-center py-4 text-muted-foreground">Aucun document disponible pour ce module</p>
+                                    <p className="text-center py-4 text-muted-foreground">
+                                        Aucun document disponible pour ce module
+                                    </p>
                                 )}
 
                                 <div className="mt-6 border-t pt-6">
@@ -104,13 +118,14 @@ export function CourseContent({ modules }: CourseContentProps) {
                 ))}
             </Accordion>
 
-            {!modules.length && (
+            {!validModules.length && (
                 <div className="text-center py-12">
                     <h3 className="text-lg font-medium">Aucun contenu disponible</h3>
-                    <p className="text-muted-foreground">Le contenu du cours sera bientôt disponible</p>
+                    <p className="text-muted-foreground">
+                        Le contenu du cours sera bientôt disponible
+                    </p>
                 </div>
             )}
         </div>
     )
 }
-

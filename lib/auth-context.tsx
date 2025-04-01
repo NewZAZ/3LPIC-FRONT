@@ -26,19 +26,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const router = useRouter()
 
     useEffect(() => {
-        // Vérifier si l'utilisateur est déjà connecté
-        const checkAuth = async () => {
-            try {
-                const currentUser = await authService.getSession()
-                setUser(currentUser)
-            } catch (error) {
-                console.error("Erreur lors de la vérification de la session:", error)
-            } finally {
-                setLoading(false)
+        const fetchSession = async () => {
+            const user = await authService.getSession()
+            console.log("user", user)
+            if (!user) {
+                router.push("/login")
+            } else {
+                setUser(user)
             }
+            setLoading(false)
         }
 
-        checkAuth()
+        fetchSession()
     }, [])
 
     const login = async (email: string, password: string) => {

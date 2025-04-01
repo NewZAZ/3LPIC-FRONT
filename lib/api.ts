@@ -84,7 +84,7 @@ export const authService = {
             }
 
             const data = await response.json()
-            return data.user || null
+            return data || null
         } catch (error) {
             console.error("Erreur lors de la vérification de la session:", error)
             return null
@@ -101,7 +101,7 @@ export const uploadService = {
 
             const response = await fetch(`${API_URL}/upload`, {
                 method: "POST",
-                credentials: "include", // Inclut les cookies
+                credentials: "include",
                 body: formData,
             })
 
@@ -117,7 +117,6 @@ export const uploadService = {
     },
 }
 
-// Service pour les cours
 export const courseService = {
     async getCourses(): Promise<any[]> {
         try {
@@ -160,7 +159,9 @@ export const courseService = {
                 throw new Error(errorData.message || "Erreur lors de la récupération des modules")
             }
 
-            return await response.json()
+            const data = await response.json()
+
+            return data.data
         } catch (error) {
             console.error("Erreur:", error)
             return []
