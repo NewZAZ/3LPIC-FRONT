@@ -8,7 +8,7 @@ interface Grade {
     id: string
     title: string
     grade: number | null
-    max_grade: number
+    maxGrade: number
     feedback: string | null
     percentage: number
     created_at: string
@@ -41,7 +41,7 @@ export function CourseGrades({ courseId }: CourseGradesProps) {
     const totalPercentage = grades.reduce((acc, grade) => acc + grade.percentage, 0)
     const weightedGrades = grades.reduce((acc, grade) => {
         if (grade.grade !== null) {
-            return acc + (grade.grade / grade.max_grade) * grade.percentage
+            return acc + (grade.grade / grade.maxGrade) * grade.percentage
         }
         return acc
     }, 0)
@@ -70,9 +70,9 @@ export function CourseGrades({ courseId }: CourseGradesProps) {
                             <TableRow key={grade.id}>
                                 <TableCell className="font-medium">{grade.title}</TableCell>
                                 <TableCell>{grade.percentage}%</TableCell>
-                                <TableCell>{grade.grade !== null ? `${grade.grade}/${grade.max_grade}` : "-"}</TableCell>
+                                <TableCell>{grade.grade !== null ? `${grade.grade}/${grade.maxGrade}` : "-"}</TableCell>
                                 <TableCell>
-                                    {grade.grade !== null ? `${((grade.grade / grade.max_grade) * 100).toFixed(1)}%` : "-"}
+                                    {grade.grade !== null ? `${((grade.grade / grade.maxGrade) * 100).toFixed(1)}%` : "-"}
                                 </TableCell>
                                 <TableCell>{grade.feedback || "-"}</TableCell>
                             </TableRow>

@@ -177,7 +177,8 @@ export const courseService = {
                 throw new Error(errorData.message || "Erreur lors de la récupération des notes")
             }
 
-            return await response.json()
+            const data = await response.json()
+            return data
         } catch (error) {
             console.error("Erreur:", error)
             return []
