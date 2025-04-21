@@ -10,10 +10,11 @@ import { toast } from "sonner"
 import { uploadService } from "@/lib/api"
 
 interface FileUploadProps {
+    courseId: string
     moduleId: string
 }
 
-export function FileUpload({ moduleId }: FileUploadProps) {
+export function FileUpload({ courseId, moduleId }: FileUploadProps) {
     const [file, setFile] = useState<File | null>(null)
     const [uploading, setUploading] = useState(false)
 
@@ -34,14 +35,13 @@ export function FileUpload({ moduleId }: FileUploadProps) {
         setUploading(true)
 
         try {
-            await uploadService.uploadFile(file, moduleId)
+            await uploadService.uploadFile(file, courseId, moduleId)
 
             toast.success("Succès", {
                 description: "Votre travail a été soumis avec succès",
             })
 
             setFile(null)
-            // Réinitialiser l'input file
             const fileInput = document.getElementById("file-upload") as HTMLInputElement
             if (fileInput) fileInput.value = ""
         } catch (error: any) {

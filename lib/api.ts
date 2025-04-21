@@ -31,7 +31,7 @@ export const authService = {
         try {
             const response = await fetchWithCredentials(`${API_URL}/auth/login`, {
                 method: "POST",
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({email, password}),
             })
 
             if (!response.ok) {
@@ -50,7 +50,7 @@ export const authService = {
         try {
             const response = await fetchWithCredentials(`${API_URL}/auth/register`, {
                 method: "POST",
-                body: JSON.stringify({ fullName: fullName, email, password }),
+                body: JSON.stringify({fullName: fullName, email, password}),
             })
 
             if (!response.ok) {
@@ -93,7 +93,7 @@ export const authService = {
 }
 
 export const uploadService = {
-    async uploadFile(file: File, moduleId: string): Promise<any> {
+    async uploadFile(file: File, courseId: string, moduleId: string): Promise<any> {
         try {
             const formData = new FormData()
             formData.append("file", file)

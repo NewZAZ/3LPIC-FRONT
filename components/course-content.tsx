@@ -30,9 +30,10 @@ interface Document {
 
 interface CourseContentProps {
     modules?: Module[] | null
+    courseId: string
 }
 
-export function CourseContent({ modules }: CourseContentProps) {
+export function CourseContent({ courseId, modules }: CourseContentProps) {
     const validModules = Array.isArray(modules) ? modules : []
 
     return (
@@ -110,7 +111,7 @@ export function CourseContent({ modules }: CourseContentProps) {
 
                                 <div className="mt-6 border-t pt-6">
                                     <h4 className="mb-4 font-medium">Soumettre un travail</h4>
-                                    <FileUpload moduleId={module.id} />
+                                    <FileUpload courseId={courseId} moduleId={module.id} />
                                 </div>
                             </div>
                         </AccordionContent>

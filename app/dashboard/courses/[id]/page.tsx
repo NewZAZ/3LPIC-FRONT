@@ -37,7 +37,6 @@ export default function CoursePage() {
                 setCourse(courseData)
 
                 const modulesData = await courseService.getCourseModules(courseId)
-                console.log("Modules:", modulesData)
                 setModules(modulesData)
             } catch (error) {
                 console.error("Erreur lors du chargement du cours:", error)
@@ -93,7 +92,7 @@ export default function CoursePage() {
                         <TabsTrigger value="grades">Notes</TabsTrigger>
                     </TabsList>
                     <TabsContent value="content">
-                        <CourseContent modules={modules} />
+                        <CourseContent courseId={courseId} modules={modules} />
                     </TabsContent>
                     <TabsContent value="grades">
                         <CourseGrades courseId={courseId} />
